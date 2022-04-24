@@ -1,44 +1,51 @@
 // Assignment Code
+
+// Add event listener to generate button
 var generateBtn = document.querySelector("#generate");
+generateBtn.addEventListener("click", generatePassword);
 
 // Write password to the #password input
-function writePassword() {
-  var password = writePassword();
+function writePassword(length, charTypes) {
   var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
-  var charSets = {
+  var types = charTypes.split(", ");
+  console.log(password, length, charTypes, types);
+  var optionalChars = {
     lowercase: 'abcdefghijklmnopqrstuvwxyz' ,
     uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' ,
     numeric: '1234567890' ,
     special: ' !"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~' ,
   };
-  return null;
-}
-
-function passGen(length){
   var pass = '';
-  var chars=''
-  if (upper = true){
-    chars += uppercase;
+  var charSets='';
+  if (types.includes("uppercase")){
+    charSets += optionalChars.uppercase;
   }
-  if (lower = true){
-    chars += lowercase;
+  if (types.includes("lowercase")){
+    charSets += optionalChars.lowercase;
   }
-  if (numeric = true){
-    chars += numeric
+  if (types.includes("numeric")){
+    charSets += optionalChars.numeric
   }
-  if (special = true){
-    chars += special;
+  if (types.includes("special")){
+    charSets += optionalChars.special;
   }
   for (let i = 0; i < length; i++){
-    pass[i] = chars.charAt(Math.random()* Math.random())
+    pass += charSets.charAt(Math.floor(Math.random() * charSets.length));
   }
-  return pass;
+  console.log(pass);
+  console.log(passwordText);
+  passwordText.innerHTML = pass;
 }
 
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
-var length = Number(prompt("Enter a password length between 8 and 20")),
-  charType = prompt("Enter a character type: special, numeric, uppercase, lowercase."),
-  password = writePassword();
+function generatePassword() {
+  var length = Number(prompt("Enter a password length between 8 and 20"));
+  var charTypes = prompt("Enter a character type: special, numeric, uppercase, lowercase.");
+  writePassword(length, charTypes);
+}
+
+
+/*
+var length = Number(prompt("Enter a password length between 8 and 20"));
+var charTypes = prompt("Enter a character type: special, numeric, uppercase, lowercase.");
+writePassword();
+*/
