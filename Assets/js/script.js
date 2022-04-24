@@ -41,6 +41,8 @@ function writePassword(length, charTypes) {
 // ensures that the prompts don't show up after refreshing the page
 function generatePassword() {
   var length = Number(prompt("Enter a password length between 8 and 128"));
+  while (length < 8 || length > 128)
+    length = Number(prompt("Enter a password length between 8 and 128"));
   var charTypes = prompt("Enter a character type: special, numeric, uppercase, lowercase.");
   writePassword(length, charTypes);
 }
