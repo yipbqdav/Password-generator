@@ -4,7 +4,7 @@
 var generateBtn = document.querySelector("#generate");
 generateBtn.addEventListener("click", generatePassword);
 
-// Write password to the #password input
+// main function that generates the password
 function writePassword(length, charTypes) {
   var passwordText = document.querySelector("#password");
   var types = charTypes.split(", ");
@@ -29,16 +29,18 @@ function writePassword(length, charTypes) {
   if (types.includes("special")){
     charSets += optionalChars.special;
   }
+  // randomizer given certain parameters
   for (let i = 0; i < length; i++){
+    // line runs through loop "length" amount of times, adding a random character from charSets to the password
     pass += charSets.charAt(Math.floor(Math.random() * charSets.length));
   }
   console.log(pass);
   console.log(passwordText);
   passwordText.innerHTML = pass;
 }
-
+// ensures that the prompts don't show up after refreshing the page
 function generatePassword() {
-  var length = Number(prompt("Enter a password length between 8 and 20"));
+  var length = Number(prompt("Enter a password length between 8 and 128"));
   var charTypes = prompt("Enter a character type: special, numeric, uppercase, lowercase.");
   writePassword(length, charTypes);
 }
